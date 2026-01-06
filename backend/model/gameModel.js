@@ -40,8 +40,8 @@ const deleteGame = async (id) => {
 const updateGame = async (id, data) => {
     const { name } = data
     const list = await pool.query(`
-        UPDATE game SET name = $1 RETURNING id`, 
-        [name])
+        UPDATE game SET name = $1 WHERE id = $2 RETURNING id`, 
+        [name, id])
 
     const newId = list.rows[0].id
 
