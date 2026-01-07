@@ -10,6 +10,9 @@ async function database(){
     catch(err){
         console.log("Gagal, Error: ", err.message)
     }
+    finally{
+        process.exit(0)
+    }
 }
 
 database()

@@ -11,6 +11,9 @@ async function drop(){
     catch(err){
         console.log("Gagal Menghapus")
     }
+    finally{
+        process.exit(0)
+    }
 }
 
 drop()

@@ -106,7 +106,7 @@ router.put("/:id", gameController.updateGame);
  * @swagger
  * /game/{id}:
  *   delete:
- *     summary: Hapus game berdasarkan ID
+ *     summary: Delete game
  *     tags: [Game]
  *     parameters:
  *       - in: path
