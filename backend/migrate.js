@@ -8,53 +8,91 @@ async function persona() {
             name VARCHAR
             )
         `)
-
-        await pool.query(`
-            CREATE TABLE IF NOT EXISTS personas(
-            id SERIAL PRIMARY KEY,
-            name VARCHAR,
-            image TEXT,
-            game INT,
-            description TEXT,
-            
-            FOREIGN KEY (game) REFERENCES game(id))
-            `)
-
+        
         await pool.query(`
             CREATE TABLE IF NOT EXISTS affinities(
-            id SERIAL PRIMARY KEY,
-            name VARCHAR,
-            image TEXT)
-        `)
-
-        await pool.query(`
-            CREATE TABLE IF NOT EXISTS move(
-            id SERIAL PRIMARY KEY,
-            name VARCHAR,
-            SP INT,
-            percentage INT,
-            element INT,
-            
-            FOREIGN KEY (element) REFERENCES affinities(id)
-            )
-        `)
-
-        await pool.query(`
-            CREATE TABLE IF NOT EXISTS type(
             id SERIAL PRIMARY KEY,
             name VARCHAR
             )
         `)
 
         await pool.query(`
-            CREATE TABLE IF NOT EXISTS items(
+            CREATE TABLE IF NOT EXISTS persona(
+            id SERIAL PRIMARY KEY,
+            name VARCHAR
+            )
+        `)
+
+        await pool.query(`
+            CREATE TABLE IF NOT EXISTS affinities_type(
+            id SERIAL PRIMARY KEY,
+            name VARCHAR
+            )
+        `)
+
+        await pool.query(`
+            CREATE TABLE IF NOT EXISTS persona_affinitites(
+            id SERIAL PRIMARY KEY,
+            persona INT,
+            affinities INT,
+            affinities_type INT,
+            game INT,
+
+            FOREIGN KEY (persona) REFERENCES persona(id),
+            FOREIGN KEY (affinities) REFERENCES affinities(id),
+            FOREIGN KEY (affinities_type) REFERENCES affinities_type(id),
+            FOREIGN KEY (game) REFERENCES game(id)
+            )
+        `)
+
+        await pool.query(`
+            CREATE TABLE IF NOT EXISTS skill(
             id SERIAL PRIMARY KEY,
             name VARCHAR,
+            percentage INT,
+            accuracy INT,
+            scalling VARCHAR,
             description TEXT,
-            type INT,
+            affinities INT,
+            game INT,
 
-            FOREIGN KEY (type) REFERENCES type(id)
+            FOREIGN KEY (affinities) REFERENCES affinities(id),
+            FOREIGN KEY (game) REFERENCES game(id)
+            )
+        `)
 
+        await pool.query(`
+            CREATE TABLE IF NOT EXISTS persona_skill(
+            id SERIAL PRIMARY KEY,
+            persona INT,
+            skill INT,
+            
+            FOREIGN KEY (persona) REFERENCES persona(id),
+            FOREIGN KEY (skill) REFERENCES skill(id)
+             )
+        `)
+
+        await pool.query(`
+            CREATE TABLE IF NOT EXISTS persona_image(
+            id SERIAL PRIMARY KEY,
+            image TEXT,
+            persona INT,
+            game INT,
+            
+            FOREIGN KEY (persona) REFERENCES persona(id),
+            FOREIGN KEY (game) REFERENCES game(id)
+            )
+        `)
+
+        await pool.query(`
+            CREATE TABLE IF NOT EXISTS persona_description(
+            id SERIAL PRIMARY KEY,
+            description TEXT,
+            persona INT,
+            game INT,
+            
+            FOREIGN KEY (persona) REFERENCES persona(id),
+            FOREIGN KEY (game) REFERENCES game(id)
             )
         `)
 
@@ -64,7 +102,7 @@ async function persona() {
         console.log("Gagal, Error: ", err.message)
     }
     finally {
-        pool.end
+        process.exit(0)
     }
 }
 

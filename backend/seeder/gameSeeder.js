@@ -4,9 +4,9 @@ async function gameSeeder() {
     try {
         const games = [
             // main game
-            { name: "Revelations Persona"},
-            { name: "Persona 2 Innocent Sin"},
-            { name: "Persona 2 Eternal Punishment"},
+            { name: "Revelations Persona" },
+            { name: "Persona 2 Innocent Sin" },
+            { name: "Persona 2 Eternal Punishment" },
             { name: "Persona 3" },
             { name: "Persona 3 FES" },
             { name: "Persona 3 Portable" },
@@ -18,22 +18,22 @@ async function gameSeeder() {
             { name: "Persona 5 Royal" },
 
             //spin off
-            {name: "Persona Q Shadow of the Labyrinth"},
-            {name: "Persona Q2 New Cinema Labyrinth"},
-            {name: "Persona 4 Arena"},
-            {name: "Persona 4 Arena Ultimax"},
-            {name: "Persona 3 Dancing In Moonlight"},
-            {name: "Persona 4 Dancing All Night"},
-            {name: "Persona 5 Dancing In Starlight"},
-            {name: "Persona 5 Striker"},
-            {name: "Persona 5 The Phantom X"},
-            {name: "Persona 5 Tactica"},
+            { name: "Persona Q Shadow of the Labyrinth" },
+            { name: "Persona Q2 New Cinema Labyrinth" },
+            { name: "Persona 4 Arena" },
+            { name: "Persona 4 Arena Ultimax" },
+            { name: "Persona 3 Dancing In Moonlight" },
+            { name: "Persona 4 Dancing All Night" },
+            { name: "Persona 5 Dancing In Starlight" },
+            { name: "Persona 5 Striker" },
+            { name: "Persona 5 The Phantom X" },
+            { name: "Persona 5 Tactica" },
         ]
 
         for (let game of games) {
             await pool.query(`
-            INSERT INTO game (name) VALUES ($1)`, 
-            [game.name])
+            INSERT INTO game (name) VALUES ($1)`,
+                [game.name])
         }
 
         console.log("Berhasil Membuat Game")
