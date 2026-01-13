@@ -6,6 +6,7 @@ async function persona() {
             CREATE TABLE IF NOT EXISTS game(
             id SERIAL PRIMARY KEY,
             name VARCHAR
+            image TEXT
             )
         `)
         

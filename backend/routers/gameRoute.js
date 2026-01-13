@@ -56,7 +56,6 @@ router.get("/:id", gameController.getGameById);
  *             type: object
  *             required:
  *               - name
- *               - genre
  *             properties:
  *               name:
  *                 type: string
@@ -91,6 +90,9 @@ router.post("/", gameController.createGame);
  *               name:
  *                 type: string
  *                 example: Persona 5 Royal
+ *               image:
+ *                 type: text
+ *                 example: "http://localhost:3000/uploads/games/"
  *
  *     responses:
  *       200:

@@ -1,7 +1,6 @@
 const personaController = require("../controllers/personaController")
 const express = require("express")
 const router = express.Router()
-const uploadPersona = require("../multer")
 
 router.get("/", personaController.getPersona)
 router.get("/:id", personaController.getPersonaById)
