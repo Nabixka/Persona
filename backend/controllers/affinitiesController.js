@@ -130,3 +130,47 @@ exports.deleteAffinities = async (req, res) => {
         })
     }
 }
+
+exports.getAffinitiesType = async (req, res) => {
+    try{
+        const list = await affinities.getAffinitiesType()
+        res.status(200).json({
+            status: 200,
+            message: "Berhasil Mendapatkan",
+            data: list
+        })
+    }
+    catch(err){
+        res.status(500).json({
+            status: 500,
+            message: err.message
+        })
+    }
+}
+
+exports.getAffinitiesTypeById = async (req, res) => {
+    try{
+        const { id } = req.params
+        const list = await affinities.getAffinitiesTypeById(id)
+
+        if(!list){
+            return res.status(404).json({
+                status: 404,
+                message: "Tidak Ada"
+            })
+        }
+
+        res.status(200).json({
+            status: 200,
+            message: "Berhasil Mendapatkan",
+            data: list
+        })
+    }
+    catch(err){
+        res.status(500).json({
+            status: 500,
+            message: err.message
+        })
+    }
+}
+

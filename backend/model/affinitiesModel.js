@@ -49,4 +49,53 @@ const deleteAffinities = async (id) => {
     [id])
 }
 
-module.exports = { getAffinities, getAffinitiesById, createAffinities, updateAffinities, deleteAffinities }
+const getAffinitiesType = async () => {
+    const result = await pool.query(`
+        SELECT * FROM affinities_type
+    `)
+
+    return result.rows
+}
+
+const getAffinitiesTypeById = async (id) => {
+    const result = await pool.query(`
+        SELECT * FROM affinities_type WHERE id = $1`,
+    [id])
+
+    return result.rows[0]
+}
+
+const deleteAffinitiesType = async (id) => {
+    const result = await pool.query(`
+        DELETE FROM affinities_type WHERE id = $1`,
+    [id])
+}
+
+const createAffinitiesType = async (data) => {
+    const { name } = data
+    const create = await pool.query(`
+        INSERT INTO affinities_type (name) VALUES ($1) RETURNING id`,
+    [name])
+
+    const newId =  create.rows[0].id
+    const result = await pool.query(`
+        SELECT * FROM affinities_type WHERE id = $1`,
+    [newId])
+    return result.rows[0]
+}
+
+const updateAffinitiesType = async (id, data) => {
+    const { name } = data
+    const update = await pool.query(`
+        UPDATE affinities_type SET name = $1 WHERE id = $2 RETURNING id`,
+    [name, id])
+
+    const newId = update.rows[0].id
+    const result = await pool.query(`
+        SELECT * FROM affinities_type WHERE id = $1`,
+    [newId])
+
+    return result.rows[0]
+}
+
+module.exports = { getAffinities, getAffinitiesById, createAffinities, updateAffinities, deleteAffinities, getAffinitiesType, getAffinitiesTypeById, deleteAffinitiesType, updateAffinitiesType, createAffinitiesType }

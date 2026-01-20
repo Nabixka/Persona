@@ -1,5 +1,6 @@
 const affinitiesController = require("../controllers/affinitiesController")
 const express = require("express")
+const { getAffinitiesType } = require("../model/affinitiesModel")
 const router = express.Router()
 
 /**
@@ -131,5 +132,8 @@ router.put("/:id", affinitiesController.updateAffinities)
  */
 
 router.delete("/:id", affinitiesController.deleteAffinities)
+
+router.get('/type', affinitiesController.getAffinitiesType)
+router.get('/type', affinitiesController.getAffinitiesTypebyId)
 
 module.exports = router

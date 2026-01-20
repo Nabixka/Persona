@@ -17,10 +17,10 @@ const getGameById = async (id) => {
 }
 
 const createGame = async (data) => {
-    const { name } = data
+    const { name, image } = data
     const list = await pool.query(`
-        INSERT INTO game (name) VALUES ($1) RETURNING id`, 
-        [name])
+        INSERT INTO game (name, image) VALUES ($1, $2) RETURNING id`, 
+        [name, image])
     
     const newId = list.rows[0].id
 
@@ -38,10 +38,10 @@ const deleteGame = async (id) => {
 }
 
 const updateGame = async (id, data) => {
-    const { name } = data
+    const { name, image } = data
     const list = await pool.query(`
-        UPDATE game SET name = $1 WHERE id = $2 RETURNING id`, 
-        [name, id])
+        UPDATE game SET name = $1, image = $2 WHERE id = $3 RETURNING id`, 
+        [name, image, id])
 
     const newId = list.rows[0].id
 

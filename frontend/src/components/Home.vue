@@ -8,8 +8,7 @@ import Navbar from './Navbar/Navbar.vue';
             <Navbar />
         </div>
         <div>
-            <h1 class="text-4xl">Ini Home</h1>
-            <router-link to="/hello">Ganti Page</router-link>
+            
         </div>
     </div>
 </template>

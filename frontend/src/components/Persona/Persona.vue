@@ -3,8 +3,8 @@ import Navbar from '../Navbar/Navbar.vue';
 </script>
 
 <template>
-    <div >
-        <div class="pt-10">
+    <div class="h-screen bg-linear-to-b from-gray-900 to-gray-800">
+        <div class="pt-5">
             <Navbar />
         </div>
     </div>

@@ -46,7 +46,9 @@ exports.getGameById = async (req, res) => {
 
 exports.createGame = async (req, res) => {
     try{
-        const {name} = req.body
+        const { name } = req.body
+
+        const imageUrl = req.file ? `http://localhost:3000/uploads/games/${req.file.filename}` : null
 
         if(!name){
             return res.status(400).json({
@@ -55,7 +57,7 @@ exports.createGame = async (req, res) => {
             })
         }
 
-        const list = await game.createGame({name})
+        const list = await game.createGame({name, image: imageUrl})
         res.status(201).json({
             status: 201,
             message: "Berhasil Membuat Game",
@@ -103,6 +105,8 @@ exports.updateGame = async (req, res) => {
         const { id } = req.params
         const { name } = req.body
 
+        const imageUrl = req.file ? `http://localhost:3000/uploads/games/${req.file.filename}` : null
+
         if(!name){
             return res.status(400).json({
                 status: 400,
@@ -119,7 +123,7 @@ exports.updateGame = async (req, res) => {
             })
         }
 
-        const list = await game.updateGame(id, {name})
+        const list = await game.updateGame(id, {name, image: imageUrl})
         res.status(200).json({
             status: 200,
             message: "Berhasil Mengubah Game",

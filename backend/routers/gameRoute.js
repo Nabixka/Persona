@@ -1,6 +1,7 @@
 const gameController = require("../controllers/gameController");
 const express = require("express");
 const router = express.Router();
+const { uploadGames } = require("../multer")
 
 /**
  * @swagger
@@ -65,7 +66,7 @@ router.get("/:id", gameController.getGameById);
  *         message: Berhasil Membuat Game
  *
  */
-router.post("/", gameController.createGame);
+router.post("/", uploadGames.single("image"), gameController.createGame);
 
 /**
  * @swagger
@@ -102,7 +103,7 @@ router.post("/", gameController.createGame);
  *       400:
  *         description: Isi Yang Benar Wok
  */
-router.put("/:id", gameController.updateGame);
+router.put("/:id", uploadGames.single("image"), gameController.updateGame);
 
 /**
  * @swagger

@@ -5,20 +5,21 @@ const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         let folder = "uploads"
 
-        if(req.baseUrl.includes("persona_image")){
-            folder = "uploads/persona"
+        if (req.baseUrl.includes("game")) {
+            folder = "uploads/games"
         }
 
         cb(null, folder)
     },
 
     filename: function (req, file, cb) {
-        cb(null, file.originalname + Date.now())
+        const ext = path.extname(file.originalname) // .png
+        const name = path.basename(file.originalname, ext)
+
+        cb(null, `${name}-${Date.now()}${ext}`)
     }
 })
 
-const uploadPersona = multer({
-    storage
-})
+const uploadGames = multer({ storage })
 
-module.exports = { uploadPersona }
+module.exports = { uploadGames }

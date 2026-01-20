@@ -2,14 +2,16 @@ const pool = require("./database/db")
 
 async function persona() {
     try {
+        // complete
         await pool.query(`
             CREATE TABLE IF NOT EXISTS game(
             id SERIAL PRIMARY KEY,
-            name VARCHAR
+            name VARCHAR,
             image TEXT
             )
         `)
         
+        // complete
         await pool.query(`
             CREATE TABLE IF NOT EXISTS affinities(
             id SERIAL PRIMARY KEY,
@@ -17,6 +19,7 @@ async function persona() {
             )
         `)
 
+        // complete
         await pool.query(`
             CREATE TABLE IF NOT EXISTS persona(
             id SERIAL PRIMARY KEY,
@@ -24,10 +27,11 @@ async function persona() {
             )
         `)
 
+        // null, weak, normal
         await pool.query(`
             CREATE TABLE IF NOT EXISTS affinities_type(
             id SERIAL PRIMARY KEY,
-            name VARCHAR
+            name VARCHAR 
             )
         `)
 
