@@ -11,11 +11,13 @@ const router = useRoute()
 
 const getDetail = async () => {
     try {
-        const id = router.params.id
+        const id = history.state?.id
         const res = await fetch(`${API_URL}/game/${id}`)
         const json = await res.json()
 
         gameDetail.value = json.data
+
+
     }
     catch (err) {
         error.value = err.message
@@ -49,7 +51,7 @@ onMounted(() => {
         <div v-else class="pl-25 pr-25">
             <div class="flex border border-white rounded overflow-hidden">
                 <div class="w-85 border-r border-white">
-                    <img class="h-100 w-full" :src="gameDetail.image">
+                    <img class="h-100 w-full" :src="`${API_URL}${gameDetail.image}`">
                 </div>
                 <div class="w-full grid grid-rows-4">
                     <p class="bg-gray-100 text-white">{{ gameDetail.name }} </p>

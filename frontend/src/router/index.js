@@ -5,10 +5,26 @@ import GameDetail from "../components/Game/GameDetail.vue";
 import Persona from "../components/Persona/Persona.vue";
 
 const routes = [
-    { path: '/', component: Home },
-    { path: '/game', component: Game },
-    { path: '/game/:id', component: GameDetail },
-    { path: '/persona', component: Persona },
+    {
+        path: '/',
+        name: "home",
+        component: Home
+    },
+    { 
+        path: '/game',
+        name: "name",
+        component: Game 
+    },
+    { 
+        path: '/game',
+        name: "gameDetail",
+        component: GameDetail 
+    },
+    { 
+        path: '/persona', 
+        name: "persona",
+        component: Persona 
+    },
 ]
 
 const router = createRouter({

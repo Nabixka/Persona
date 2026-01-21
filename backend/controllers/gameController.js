@@ -48,7 +48,7 @@ exports.createGame = async (req, res) => {
     try{
         const { name } = req.body
 
-        const imageUrl = req.file ? `http://localhost:3000/uploads/games/${req.file.filename}` : null
+        const imageUrl = req.file ? `/uploads/games/${req.file.filename}` : null
 
         if(!name){
             return res.status(400).json({
@@ -105,7 +105,7 @@ exports.updateGame = async (req, res) => {
         const { id } = req.params
         const { name } = req.body
 
-        const imageUrl = req.file ? `http://localhost:3000/uploads/games/${req.file.filename}` : null
+        const imageUrl = req.file ? `/uploads/games/${req.file.filename}` : null
 
         if(!name){
             return res.status(400).json({
