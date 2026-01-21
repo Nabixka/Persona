@@ -1,7 +1,7 @@
 const affinities = require("../model/affinitiesModel")
 
 exports.getAffinities = async (req, res) => {
-    try{
+    try {
         const list = await affinities.getAffinities()
 
         res.status(200).json({
@@ -10,20 +10,20 @@ exports.getAffinities = async (req, res) => {
             data: list
         })
     }
-    catch(err){
+    catch (err) {
         res.status(500).json({
             status: 500,
             message: err.message
         })
     }
-} 
+}
 
 exports.getAffinitiesById = async (req, res) => {
-    try{
+    try {
         const { id } = req.params
         const list = await affinities.getAffinitiesById(id)
 
-        if(!list){
+        if (!list) {
             return res.status(404).json({
                 status: 404,
                 message: "Affinities Tidak Ada"
@@ -35,7 +35,7 @@ exports.getAffinitiesById = async (req, res) => {
             data: list
         })
     }
-    catch(err){
+    catch (err) {
         res.status(500).json({
             status: 500,
             message: err.message
@@ -44,23 +44,23 @@ exports.getAffinitiesById = async (req, res) => {
 }
 
 exports.createAffinities = async (req, res) => {
-    try{
+    try {
         const { name } = req.body
-        if(!name){
+        if (!name) {
             return res.status(400).json({
                 status: 400,
                 message: "Isi Yang Benar Wok"
             })
         }
 
-        const list = await affinities.createAffinities({name})
+        const list = await affinities.createAffinities({ name })
         res.status(201).json({
             status: 201,
             message: "Berhasil Membuat Affinities",
             data: list
         })
     }
-    catch(err){
+    catch (err) {
         res.status(500).json({
             status: 500,
             message: err.message
@@ -69,26 +69,26 @@ exports.createAffinities = async (req, res) => {
 }
 
 exports.updateAffinities = async (req, res) => {
-    try{
+    try {
         const { id } = req.params
         const { name } = req.body
 
         const exist = await affinities.getAffinitiesById(id)
-        if(!exist){
+        if (!exist) {
             return res.status(404).json({
                 status: 404,
                 message: "Affinities Tidak Ada"
             })
         }
 
-        if(!name){
+        if (!name) {
             return res.status(400).json({
                 status: 400,
                 message: "Isi Yang Benar Wok"
             })
         }
 
-        const list = await affinities.updateAffinities(id, {name})
+        const list = await affinities.updateAffinities(id, { name })
 
         res.status(200).json({
             status: 200,
@@ -97,7 +97,7 @@ exports.updateAffinities = async (req, res) => {
         })
 
     }
-    catch(err){
+    catch (err) {
         res.status(500).json({
             status: 500,
             message: err.message
@@ -106,11 +106,11 @@ exports.updateAffinities = async (req, res) => {
 }
 
 exports.deleteAffinities = async (req, res) => {
-    try{
+    try {
         const { id } = req.params
-        
+
         const exist = await affinities.getAffinitiesById(id)
-        if(!exist){
+        if (!exist) {
             return res.status(404).json({
                 status: 404,
                 message: "Affinities Tidak Ada"
@@ -123,7 +123,7 @@ exports.deleteAffinities = async (req, res) => {
             message: "Berhasil Menghapus Affinities"
         })
     }
-    catch{
+    catch {
         res.status(500).json({
             status: 500,
             message: err.message
@@ -132,7 +132,7 @@ exports.deleteAffinities = async (req, res) => {
 }
 
 exports.getAffinitiesType = async (req, res) => {
-    try{
+    try {
         const list = await affinities.getAffinitiesType()
         res.status(200).json({
             status: 200,
@@ -140,7 +140,7 @@ exports.getAffinitiesType = async (req, res) => {
             data: list
         })
     }
-    catch(err){
+    catch (err) {
         res.status(500).json({
             status: 500,
             message: err.message
@@ -149,11 +149,11 @@ exports.getAffinitiesType = async (req, res) => {
 }
 
 exports.getAffinitiesTypeById = async (req, res) => {
-    try{
+    try {
         const { id } = req.params
         const list = await affinities.getAffinitiesTypeById(id)
 
-        if(!list){
+        if (!list) {
             return res.status(404).json({
                 status: 404,
                 message: "Tidak Ada"
@@ -166,7 +166,7 @@ exports.getAffinitiesTypeById = async (req, res) => {
             data: list
         })
     }
-    catch(err){
+    catch (err) {
         res.status(500).json({
             status: 500,
             message: err.message
@@ -174,3 +174,88 @@ exports.getAffinitiesTypeById = async (req, res) => {
     }
 }
 
+exports.deleteAffinitiesType = async (req, res) => {
+    try {
+        const { id } = req.params
+
+        const exist = await affinities.getAffinitiesTypeById(id)
+        if (!exist) {
+            return res.status(404).json({
+                status: 404,
+                message: "Tidak Ada"
+            })
+        }
+
+        const list = await affinities.deleteAffinitiesType(id)
+        res.status(200).json({
+            status: 200,
+            message: "Berhasil"
+        })
+
+    }
+    catch (err) {
+        res.status(500).json({
+            status: 500,
+            message: err.message
+        })
+    }
+}
+
+exports.createAffinitiesType = async (req, res) => {
+    try {
+        const { name } = req.body
+        if (!name) {
+            return res.status(400).json({
+                status: 400,
+                message: "Isi Yang Benar Wok"
+            })
+        }
+
+        const list = await affinities.createAffinitiesType({ name })
+        res.status(201).json({
+            status: 201,
+            message: "Berhasil Dibuat",
+            data: list
+        })
+    }
+    catch (err) {
+        res.status(500).json({
+            status: 500,
+            message: err.message
+        })
+    }
+}
+
+exports.updateAffinitiesType = async (req, res) => {
+    try {
+        const { id } = req.params
+        const { name } = req.body
+        if (!name) {
+            return res.status(400).json({
+                status: 400,
+                message: "Isi Yang Benar Wok"
+            })
+        }
+
+        const exist = await affinities.getAffinitiesTypeById(id)
+        if(!exist){
+            return res.status(404).json({
+                status: 404,
+                message: "Tidak Ada"
+            })
+        }
+
+        const list = await affinities.updateAffinitiesType({ name })
+        res.status(200).json({
+            status: 200,
+            message: "Berhasil",
+            data: list
+        })
+    }
+    catch (err) {
+        res.status(500).json({
+            status: 500,
+            message: err.message
+        })
+    }
+}

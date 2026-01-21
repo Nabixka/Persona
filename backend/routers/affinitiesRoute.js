@@ -134,6 +134,9 @@ router.put("/:id", affinitiesController.updateAffinities)
 router.delete("/:id", affinitiesController.deleteAffinities)
 
 router.get('/type', affinitiesController.getAffinitiesType)
-router.get('/type', affinitiesController.getAffinitiesTypebyId)
+router.get('/type/:id', affinitiesController.getAffinitiesTypeById)
+router.delete('/type/:id', affinitiesController.deleteAffinitiesType)
+router.post('/type', affinitiesController.createAffinitiesType)
+router.put('/type/:id', affinitiesController.updateAffinitiesType)
 
 module.exports = router
